@@ -4,6 +4,8 @@ import { Customer } from './Customer'
 import { Product } from './Product'
 import { LineItem } from './LineItem'
 import { Order } from './Order'
+import { Account } from './Account'
+import { ShoppingCart } from './ShoppingCart'
 
 console.log("############## WEBUSER ##############")
 
@@ -29,3 +31,15 @@ console.log("############## Order ##############")
 const order = new Order([lineitem], "1" , "Y", "N", "LA")
 console.log(order.toString())
 console.log(order.calTotal())
+
+console.log("############## Account ##############")
+const account = new Account(webUser, cus1.getId(),  cus1.getAddress(), cus1.getPhone(), cus1.getEmail(), '1', 'London', false, 'open', 'no')
+
+console.log(account)
+console.log(account.getId())
+console.log(account.toString())
+
+console.log("############## ShoppingCart ##############")
+const shoppingcart = new ShoppingCart(webUser, cus1.getId(), cus1.getAddress(), cus1.getPhone(), cus1.getEmail(), account.getId(), account.getBilling_address(), account.getIs_closed(), account.getOpen(), account.getClosed(), 'last month', [lineitem])
+console.log(shoppingcart)
+console.log(shoppingcart.toString())

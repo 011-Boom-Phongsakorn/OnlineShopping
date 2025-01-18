@@ -1,6 +1,6 @@
 import { WebUser } from "./WebUser"
 
-class Customer {
+class Customer{
     private webUser: WebUser
     private id: string
     private address: string
