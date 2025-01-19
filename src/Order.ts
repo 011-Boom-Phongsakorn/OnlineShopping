@@ -1,9 +1,13 @@
 import { stringify } from "querystring"
 import { OrderStatus } from "./OrderStatus"
 import { LineItem } from "./LineItem"
+import { Account } from "./Account"
+import { WebUser } from "./WebUser"
+import { Payment } from "./Payment"
 
-export class Order {
+export class Order extends Account {
     private lineItems: LineItem[] = []
+    private payment: Payment
     private number: string
     private ordered: string
     private shipped: string
@@ -11,8 +15,10 @@ export class Order {
     private status: OrderStatus
     private total: number = 0
 
-    constructor(lineItems: LineItem[],number: string, ordered: string, shipped: string, ship_to: string){
+    constructor(webUser: WebUser, id: string, address: string, phone: string, email: string, accountId: string,billing_address: string, is_closed: boolean, open: string, closed: string | null, lineItems: LineItem[], payment: Payment, number: string, ordered: string, shipped: string, ship_to: string){
+        super(webUser, id, address, phone, email, accountId, billing_address, is_closed, open, closed)
         this.lineItems = lineItems
+        this.payment = payment
         this.number = number
         this.ordered = ordered
         this.shipped = shipped
@@ -68,8 +74,17 @@ export class Order {
         return total
     }
 
+    public getPayment():Payment{
+        return this.payment
+    }
+
+    public setPayment(payment: Payment):void{
+        this.payment = payment
+    }
+
+
     public toString():string{
-        return `Order | [number = ${this.number}, ordered = ${this.ordered}, shipped = ${this.shipped}, ship_to = ${this.ship_to}, status = ${this.status}, total = ${this.total}]`
+        return `Order | [number = ${this.number}, ordered = ${this.ordered}, shipped = ${this.shipped}, ship_to = ${this.ship_to}, status = ${this.status}, total = ${this.total} [Account | ${super.toString()}], [Payment | ${this.payment}]]`
     }
 
 }

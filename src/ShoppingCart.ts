@@ -20,6 +20,14 @@ class ShoppingCart extends Account {
         this.created = create
     }
 
+    public getLineItem():LineItem[]{
+        return this.lineItem
+    }
+
+    public setLineItem(lineItem: LineItem[]):void{
+        this.lineItem = lineItem
+    }
+
     public toString():string{
         return `ShoppingCart | [Created: ${this.created} LineItem: ${this.lineItem}, [Account ${super.toString()}]]`
     }

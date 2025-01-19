@@ -6,6 +6,7 @@ import { LineItem } from './LineItem'
 import { Order } from './Order'
 import { Account } from './Account'
 import { ShoppingCart } from './ShoppingCart'
+import { Payment } from './Payment'
 
 console.log("############## WEBUSER ##############")
 
@@ -27,10 +28,7 @@ const lineitem = new LineItem(product ,10, 199)
 console.log(lineitem)
 console.log(lineitem.toString())
 
-console.log("############## Order ##############")
-const order = new Order([lineitem], "1" , "Y", "N", "LA")
-console.log(order.toString())
-console.log(order.calTotal())
+
 
 console.log("############## Account ##############")
 const account = new Account(webUser, cus1.getId(),  cus1.getAddress(), cus1.getPhone(), cus1.getEmail(), '1', 'London', false, 'open', 'no')
@@ -41,5 +39,17 @@ console.log(account.toString())
 
 console.log("############## ShoppingCart ##############")
 const shoppingcart = new ShoppingCart(webUser, cus1.getId(), cus1.getAddress(), cus1.getPhone(), cus1.getEmail(), account.getId(), account.getBilling_address(), account.getIs_closed(), account.getOpen(), account.getClosed(), 'last month', [lineitem])
-console.log(shoppingcart)
+// console.log(shoppingcart)
 console.log(shoppingcart.toString())
+// console.log(shoppingcart.getLineItem())
+
+console.log("############## ShoppingCart ##############")
+
+console.log("############## Payment ##############")
+const payment = new Payment('1', 'wait', 100, '===')
+console.log(payment.getId())
+console.log("############## Order ##############")
+
+const order = new Order(webUser, cus1.getId(), cus1.getAddress(), cus1.getPhone(), cus1.getEmail(), account.getId(), account.getBilling_address(), account.getIs_closed(), account.getOpen(), account.getClosed(), [lineitem], payment,"1" , "Y", "N", "LA")
+console.log(order.toString())
+console.log(order.calTotal())

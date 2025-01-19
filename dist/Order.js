@@ -2,11 +2,14 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Order = void 0;
 const OrderStatus_1 = require("./OrderStatus");
-class Order {
-    constructor(lineItems, number, ordered, shipped, ship_to) {
+const Account_1 = require("./Account");
+class Order extends Account_1.Account {
+    constructor(webUser, id, address, phone, email, accountId, billing_address, is_closed, open, closed, lineItems, payment, number, ordered, shipped, ship_to) {
+        super(webUser, id, address, phone, email, accountId, billing_address, is_closed, open, closed);
         this.lineItems = [];
         this.total = 0;
         this.lineItems = lineItems;
+        this.payment = payment;
         this.number = number;
         this.ordered = ordered;
         this.shipped = shipped;
@@ -50,8 +53,14 @@ class Order {
         }
         return total;
     }
+    getPayment() {
+        return this.payment;
+    }
+    setPayment(payment) {
+        this.payment = payment;
+    }
     toString() {
-        return `Order | [number = ${this.number}, ordered = ${this.ordered}, shipped = ${this.shipped}, ship_to = ${this.ship_to}, status = ${this.status}, total = ${this.total}]`;
+        return `Order | [number = ${this.number}, ordered = ${this.ordered}, shipped = ${this.shipped}, ship_to = ${this.ship_to}, status = ${this.status}, total = ${this.total} [Account | ${super.toString()}], [Payment | ${this.payment}]]`;
     }
 }
 exports.Order = Order;

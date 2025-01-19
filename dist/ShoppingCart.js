@@ -15,6 +15,12 @@ class ShoppingCart extends Account_1.Account {
     setCreated(create) {
         this.created = create;
     }
+    getLineItem() {
+        return this.lineItem;
+    }
+    setLineItem(lineItem) {
+        this.lineItem = lineItem;
+    }
     toString() {
         return `ShoppingCart | [Created: ${this.created} LineItem: ${this.lineItem}, [Account ${super.toString()}]]`;
     }
