@@ -2,14 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Order = void 0;
 const OrderStatus_1 = require("./OrderStatus");
-const Account_1 = require("./Account");
-class Order extends Account_1.Account {
-    constructor(webUser, id, address, phone, email, accountId, billing_address, is_closed, open, closed, lineItems, payment, number, ordered, shipped, ship_to) {
-        super(webUser, id, address, phone, email, accountId, billing_address, is_closed, open, closed);
+class Order {
+    constructor(number, ordered, shipped, ship_to) {
         this.lineItems = [];
+        this.payment = [];
         this.total = 0;
-        this.lineItems = lineItems;
-        this.payment = payment;
         this.number = number;
         this.ordered = ordered;
         this.shipped = shipped;
@@ -53,14 +50,20 @@ class Order extends Account_1.Account {
         }
         return total;
     }
-    getPayment() {
+    getPayments() {
         return this.payment;
     }
-    setPayment(payment) {
-        this.payment = payment;
+    addPayment(payment) {
+        this.payment.push(payment);
+    }
+    addLineItem(lineItems) {
+        this.lineItems.push(lineItems);
+    }
+    getLineItems() {
+        return this.lineItems;
     }
     toString() {
-        return `Order | [number = ${this.number}, ordered = ${this.ordered}, shipped = ${this.shipped}, ship_to = ${this.ship_to}, status = ${this.status}, total = ${this.total} [Account | ${super.toString()}], [Payment | ${this.payment}]]`;
+        return `Order | [number = ${this.number}, ordered = ${this.ordered}, shipped = ${this.shipped}, ship_to = ${this.ship_to}, status = ${this.status}, total = ${this.total}, [Payment | ${this.payment}]]`;
     }
 }
 exports.Order = Order;

@@ -1,15 +1,19 @@
-import { Customer } from "./Customer";
-import { WebUser } from "./WebUser";
+import { Order } from "./Order";
+import { Payment } from "./Payment";
+import { ShoppingCart } from "./ShoppingCart";
 
-class Account extends Customer {
+class Account {
+  private payments: Payment[] = []
+  private shoppingCart: ShoppingCart
+  private orders: Order[] = []
   private accountId: string;
   private billing_address: string;
   private is_closed: boolean;
   private open: string;
   private closed: string | null;
 
-  constructor(webUser: WebUser,id: string, address: string, phone: string, email: string, accountId: string, billing_address: string, is_closed: boolean, open: string, closed: string | null) {
-    super(webUser, id, address, phone, email)
+  constructor(accountId: string, billing_address: string, is_closed: boolean, open: string, closed: string | null) {
+    this.shoppingCart = new ShoppingCart("now")
     this.accountId = accountId;
     this.billing_address = billing_address;
     this.is_closed = is_closed;
@@ -53,8 +57,29 @@ class Account extends Customer {
     this.closed = closed
   }
 
+  public getOrders():Order[]{
+    return this.orders
+  }
+
+  public addOrder(order: Order):void{
+    this.orders.push(order)
+  }
+
+  public getPayments():Payment[]{
+    return this.payments
+  }
+
+  public addPayment(payment: Payment):void{
+    this.payments.push(payment)
+  }
+
+  public getShoppingCart():ShoppingCart{
+    return this.shoppingCart
+  }
+
+
   public toString():string {
-    return `Account | [id: ${this.accountId}, billing_address: ${this.billing_address}, is_closed: ${this.is_closed}, open: ${this.open}, closed: ${this.closed}, [Customer ${super.toString()}]]`
+    return `Account | [id: ${this.accountId}, billing_address: ${this.billing_address}, is_closed: ${this.is_closed}, open: ${this.open}, closed: ${this.closed},}]]`
   }
 
 }

@@ -1,13 +1,16 @@
+import { Account } from "./Account"
 import { WebUser } from "./WebUser"
 
 class Customer{
+    private account: Account
     private webUser: WebUser
     private id: string
     private address: string
     private phone: string
     private email: string
 
-    constructor(webUser: WebUser, id: string, address: string, phone: string, email: string){
+    constructor(account: Account, webUser: WebUser, id: string, address: string, phone: string, email: string){
+        this.account = account
         this.webUser = webUser
         this.id = id
         this.address = address
@@ -44,7 +47,7 @@ class Customer{
     }
 
     public toString():string{
-        return `Customer | [ID = ${this.id}], [Address = ${this.address}], [Phone = ${this.phone}], [Email = ${this.email}] WebUser | [${this.webUser.toString()}]`
+        return `Customer | [ID = ${this.id}], [Address = ${this.address}], [Phone = ${this.phone}], [Email = ${this.email}] WebUser | [${this.webUser.toString()}] [Account | ${this.account.toString()}]`
     }
 }
 

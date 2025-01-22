@@ -1,14 +1,10 @@
-import { Account } from "./Account"
-import { WebUser } from "./WebUser"
 import { LineItem } from "./LineItem";
 
-class ShoppingCart extends Account {
+class ShoppingCart {
     private lineItem: LineItem[] = []
     private created: string
 
-    constructor(webUser: WebUser, id: string, address: string, phone: string, email: string, accountId: string,billing_address: string, is_closed: boolean, open: string, closed: string | null, created: string, lineItem: LineItem[]) {
-        super(webUser, id, address, phone, email, accountId, billing_address, is_closed, open, closed);
-        this.lineItem = lineItem
+    constructor(created: string) {
         this.created = created;
       }
 
@@ -24,12 +20,16 @@ class ShoppingCart extends Account {
         return this.lineItem
     }
 
-    public setLineItem(lineItem: LineItem[]):void{
-        this.lineItem = lineItem
+    // public setLineItem(lineItem: LineItem[]):void{
+    //     this.lineItem = lineItem
+    // }
+
+    public addLineItem(lineitem: LineItem):void{
+        this.lineItem.push(lineitem)
     }
 
     public toString():string{
-        return `ShoppingCart | [Created: ${this.created} LineItem: ${this.lineItem}, [Account ${super.toString()}]]`
+        return `ShoppingCart | [Created: ${this.created} LineItem: ${this.lineItem}]`
     }
 }
 
